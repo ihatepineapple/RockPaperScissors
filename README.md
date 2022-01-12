@@ -20,7 +20,7 @@ Users are able to:
 ## Author
 
 - Website - [Irene Asensio](https://www.ireneasensio.dev)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/ihatepineapple)
+- Frontend Mentor - [@ihatepineapple](https://www.frontendmentor.io/profile/ihatepineapple)
 
 ### Installation
 
