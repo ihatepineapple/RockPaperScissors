@@ -2,59 +2,46 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Game = ({ score, myPlay, setScore }) => {
-  const [house, setHouse] = useState("");
-  const [playerWin, setPlayerWin] = useState("");
 
-  const [counter, setCounter] = useState(3);
+  const choices = ["rock", "paper", "scissors"];
 
-  const newHousePick = () => {
-    const choices = ["rock", "paper", "scissors"];
-    setHouse(choices[Math.floor(Math.random() * 3)]);
-  };
-  useEffect(() => {
-    newHousePick();
-  }, []);
+  const resultDisplay = document.querySelector('#result')
+const choicesDisplay = document.querySelector('#choices')
+const choices = ['rock', 'paper', 'scissors']
 
-  const Result = () => {
-    if (myPlay === "rock" && house === "scissors") {
-      setPlayerWin("win");
-      setScore(score + 1);
-    } else if (myPlay === "rock" && house === "paper") {
-      setPlayerWin("lose");
-      setScore(score - 1);
-    } else if (myPlay === "scissors" && house === "paper") {
-      setPlayerWin("win");
-      setScore(score + 1);
-    } else if (myPlay === "scissors" && house === "rock") {
-      setPlayerWin("lose");
-      setScore(score - 1);
-    } else if (myPlay === "paper" && house === "rock") {
-      setPlayerWin("win");
-      setScore(score + 1);
-    } else if (myPlay === "paper" && house === "scissors") {
-      setPlayerWin("lose");
-      setScore(score - 1);
-    } else {
-      setPlayerWin("draw");
-    }
-  };
+const handleClick = (e) => {
+  getResults(e.target.innerHTML, choices[Math.floor(Math.random() * choices.length)])
+}
+choices.forEach(choice => {
+  const button = document.createElement('button')
+  button.innerHTML = choice
+  button.addEventListener('click', handleClick)
+  choicesDisplay.appendChild(button)
+})
 
-  useEffect(() => {
-    Result();
-  }, [house]);
+const getResults = (userChoice, computerChoice) => {
+  switch (userChoice + computerChoice) {
+    case 'scissorspaper':
+    case 'rockscissors':
+    case 'paperrock':
+      resultDisplay.innerHTML = 'You chose ' + userChoice + ' and the computer chose ' + computerChoice + ' , YOU WIN!'
+      break
+    case 'paperscissors':
+    case 'scissorsrock':
+    case 'rockpaper':
+      resultDisplay.innerHTML = 'You chose ' + userChoice + ' and the computer chose ' + computerChoice + ' , YOU LOSE!'
+      break
+    case 'scissorsscissors':
+    case 'rockrock':
+    case 'paperpaper':
+      resultDisplay.innerHTML = 'You chose ' + userChoice + ' and the computer chose ' + computerChoice + ' , ITS A DRAW!'
+      break
+  }
+}
 
+  
   return (
-    <div className="game">
-      my choice:{myPlay} <br />
-      House choice:{house} <br />
-      Result:
-      {playerWin === "win" && <h2>You Win</h2>}
-      {playerWin === "lose" && <h2>You lose</h2>}
-      {playerWin === "draw" && <h2>Draw</h2>}
-      <Link to="/" onClick={() => setHouse()}>
-        Play Again
-      </Link>
-    </div>
+
   );
 };
 
