@@ -9,7 +9,11 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case "GAME_PLAY": {
-      return action.payload;
+      return {
+        ...state,
+        userPick: action.payload.user,
+        housePick: action.payload.house,
+      };
     }
     default: {
       return state;

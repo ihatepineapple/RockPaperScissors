@@ -1,6 +1,6 @@
-export function updateScore(data) {
+export function updateScore(user, house) {
   return {
     type: "GAME_PLAY",
-    payload: data,
+    payload: { user, house },
   };
 }
